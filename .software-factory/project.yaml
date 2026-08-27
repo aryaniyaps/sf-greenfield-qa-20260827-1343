@@ -1,0 +1,25 @@
+schemaVersion: software-factory.project/v4
+development:
+  prepare: [node, --version]
+  initialize: [node, --version]
+  start: [node, -e, "setInterval(() => {}, 1000)"]
+  health: [node, -e, "process.exit(0)"]
+automations:
+  - schemaVersion: software-factory.automation/v1
+    id: semgrep
+    schedule: "0 9 * * 1"
+    daggerFunction: semgrep
+    issueTitle: Semgrep maintenance finding
+    task: Review and repair the reported Semgrep finding.
+  - schemaVersion: software-factory.automation/v1
+    id: alint
+    schedule: "0 10 * * 1"
+    daggerFunction: alint
+    issueTitle: Alint maintenance finding
+    task: Review and repair the reported Alint finding.
+  - schemaVersion: software-factory.automation/v1
+    id: ls-lint
+    schedule: "0 11 * * 1"
+    daggerFunction: ls-lint
+    issueTitle: ls-lint maintenance finding
+    task: Review and repair the reported ls-lint finding.
